@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+{% block head %}
+    <!-- TODO: get rid of this -->
+    <script src="/static/js/helpers.js"></script>
+
+    <script src="/static/js/libs/require.js"></script>
+    <script>
+        require.config({
+            baseUrl: '/static/js',
+            paths: {
+                jquery: 'libs/jquery-2.1.0.min',
+                underscore: 'libs/underscore-min',
+                backbone: 'libs/backbone-min',
+                sockjs: 'libs/sockjs-0.3.4.min'
+            },
+            shim: {
+                'jquery': {
+                    exports: '$'
+                },
+                'underscore': {
+                    exports: '_'
+                }
+            }
+        });
+
+        require(["views/app"], function(App) {
+            window.app = new App();
+            window.app.render();
+        });
+
+    </script>
+
+{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" style="padding: 10px 15px" href="/"><img src="/static/img/logo.png" style="height: 32px;"/> webmux</a>
+        </div>
+        <!-- TODO: implement
+        <ul class="nav navbar-nav navbar-left">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th-large"></i> Desktops <b class="caret"></b></a>
+                <ul class="dropdown-menu desktops">
+                    <li><a id="new-desktop">New Desktop</a></li>
+                    <li><a id="manage-desktops">Manage Desktops</a></li>
+                    <li class="divider"></li>
+                </ul>
+            </li>
+        </ul>
+        -->
+        <ul class="nav navbar-nav navbar-left">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cloud-upload"></i> Connect <b class="caret"></b></a>
+                <ul class="dropdown-menu connections">
+                    <li><a id="new-connection">New Connection</a></li>
+                    <li><a id="manage-connections">Manage Connections</a></li>
+                    <li class="divider"></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="/logout"><i class="glyphicon glyphicon-user"></i> Log out</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i> Settings <b class="caret"></b></a>
+                <ul class="dropdown-menu users">
+                    {% if user.is_admin %}
+                    <li><a id="manage-users">Manage Users</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+<div class="container">
+    <div class="window-icons"></div>
+</div>
+
+<!-- TODO: move templates to files and include with require.js -->
+<template id="connect-dialog-template">
+    <div class="modal show">
+    </div>
+    <div class="modal-dialog" style="z-index: 10000">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close">&times;</button>
+                <h4 class="modal-title">New Connection</h4>
+            </div>
+            <div class="modal-body">
+                <p class="label label-danger error"></p>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="connection-name" placeholder="My Connection">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Host Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="host" placeholder="example.com">
+                        </div>
+                        <label class="col-sm-1 control-label">Port</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="port" placeholder="22" value="22">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">User Name</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="username" placeholder="root">
+                        </div>
+                        <label class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control" name="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Private Key</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control privkey-input" rows="8" name="privkey"></textarea>
+                            <input type="file" name="privkey-upload">
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default close-button">Close</button>
+                <button type="button" class="btn btn-primary">Add Connection</button>
+            </div>
+    </div>
+    </div>
+</template>
+
+<template id="manage-connections-dialog-template">
+    <div class="modal show">
+    </div>
+    <div class="modal-dialog" style="z-index: 10000">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close">&times;</button>
+                <h4 class="modal-title">Manage Connections</h4>
+            </div>
+            <div class="modal-body">
+                <p class="label label-danger error"></p>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Connection</label>
+                        <div class="col-sm-9">
+                            <select multiple class="form-control connections" name="connection">
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <hr/>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="connection-name" placeholder="My Connection">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Host Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="host" placeholder="example.com">
+                        </div>
+                        <label class="col-sm-1 control-label">Port</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="port" placeholder="22" value="22">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">User Name</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="username" placeholder="root">
+                        </div>
+                        <label class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control" name="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Private Key</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control privkey-input" rows="8" name="privkey"></textarea>
+                            <input type="file" name="privkey-upload">
+
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default close-button">Close</button>
+                <button type="button" class="btn btn-default reset">Reset</button>
+                <button type="button" class="btn btn-danger delete">Delete</button>
+                <button type="button" class="btn btn-primary">Update</button>
+            </div>
+    </div>
+    </div>
+</template>
+
+<template id="manage-users-dialog-template">
+    <div class="modal show">
+    </div>
+    <div class="modal-dialog" style="z-index: 10000">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close">&times;</button>
+                <h4 class="modal-title">Manage Users</h4>
+            </div>
+            <div class="modal-body">
+                <p class="label label-danger error"></p>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">User</label>
+                        <div class="col-sm-9">
+                            <select multiple class="form-control users" name="users">
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <hr/>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">E-mail</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" name="user_email" placeholder="email@example.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" name="user_password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="checkbox" style="margin-left: 150px">
+                        <label>
+                            <input type="checkbox" name="is_admin"> Administrator
+                        </label>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default close-button">Close</button>
+                <button type="button" class="btn btn-default reset">Reset</button>
+                <button type="button" class="btn btn-success create">Create</button>
+                <button type="button" class="btn btn-danger delete">Delete</button>
+                <button type="button" class="btn btn-primary">Update</button>
+            </div>
+    </div>
+    </div>
+</template>
+{% endblock %}

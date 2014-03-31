@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'SourceCodePro';
+    font-weight: normal;
+
+    src: url('eot/SourceCodePro-Regular.eot');
+    src: url('eot/SourceCodePro-Regular.eot?#iefix') format('embedded-opentype'),
+    url('woff/otf/SourceCodePro-Regular.otf.woff') format('woff'),
+    url('svg/SourceCodePro-Regular.svg#SourceCodePro-Regular') format('svg');
+}
+
+@font-face {
+    font-family: 'SourceCodePro';
+    font-weight: bold;
+
+    src: url('eot/SourceCodePro-Bold.eot');
+    src: url('eot/SourceCodePro-Bold.eot?#iefix') format('embedded-opentype'),
+    url('woff/otf/SourceCodePro-Bold.otf.woff') format('woff'),
+    url('svg/SourceCodePro-Bold.svg#SourceCodePro-Bold') format('svg');
+}

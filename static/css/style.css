@@ -1,0 +1,166 @@
+/**
+ * Terminal
+ */
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+.window {
+    padding-top: 23px;
+    position: absolute;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 0px 50px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.maximized .window {
+    border: none;
+    box-shadow: none;
+}
+
+.dark .window {
+    box-shadow: none;
+}
+
+.bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 23px;
+    line-height: 23px;
+    font-size: 14px;
+    text-align: center;
+    font-family: "SourceCodePro", monospace;
+    color: black;
+    background: #F9F9F9; /* Old browsers */
+    background: -moz-linear-gradient(top, #F9F9F9 0%, #BDBDBD 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F9F9F9), color-stop(100%,#BDBDBD)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #F9F9F9 0%,#BDBDBD 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #F9F9F9 0%,#BDBDBD 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #F9F9F9 0%,#BDBDBD 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #F9F9F9 0%,#BDBDBD 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F9F9F9', endColorstr='#BDBDBD',GradientType=0 ); /* IE6-9 */
+}
+
+.dark .bar,
+.maximized .bar {
+}
+
+.title {
+    font-size: 12px;
+    text-align: center;
+    line-height: 23px;
+    cursor: default;
+    margin-bottom: -23px;
+}
+
+.tab {
+    font-size: 12px;
+    line-height: 23px;
+    padding: 0 5px;
+    float: left;
+    cursor: pointer;
+    color: gray;
+}
+
+.tab:hover {
+    color: black;
+}
+
+.grip {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 22px;
+    height: 22px;
+    cursor: se-resize;
+    background: transparent;
+}
+
+.grip:hover {
+}
+
+.terminal {
+    border: #000 solid 5px;
+    font-family: "SourceCodePro", monospace;
+    font-size: 12px;
+    background: rgba(0,0,0,0.5);
+}
+
+.terminal div {
+    white-space: nowrap;
+}
+
+.reverse-video {
+    color: #000;
+    background: #f0f0f0;
+}
+
+.dialog {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+}
+
+.privkey-input {
+    font-family: SourceCodePro, monospace;
+    font-size: 10px;
+    white-space: pre;
+    word-wrap: normal;
+}
+
+.hover {
+    background-color: #eee;
+}
+
+.dropdown-menu a {
+    cursor: pointer;
+}
+
+.tab.close-button {
+    color: #800000;
+    text-shadow: 0 0 0 black, 1px 1px 1px white;
+}
+
+.tab.close-button:hover {
+    color: #cc0000;
+}
+
+.tab.minimize-button {
+    color: #A0A000;
+    text-shadow: 0 0 0 black, 1px 1px 1px white;
+}
+
+.tab.minimize-button:hover {
+    color: #c0c000;
+}
+
+.tab.maximize-button {
+    color: #008000;
+    text-shadow: 0 0 0 black, 1px 1px 1px white;
+}
+
+.tab.maximize-button:hover {
+    color: #00c000;
+}
+
+.window-icon {
+    width: 120px;
+    display: inline-block;
+}
+
+.window-icon img {
+    display: block;
+    margin: 0 auto;
+    width: 64px;
+}
+
+.window-icon div {
+    text-align: center;
+    font-size: 10px;
+    width: 100%;
+
+}
