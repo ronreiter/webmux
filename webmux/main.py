@@ -12,6 +12,8 @@ from webmux.protocols import TerminalFactory
 from webmux.user import LongSession
 from webmux.models import Terminal
 
+from argparse import ArgumentParser
+
 import webmux
 import os
 
@@ -24,6 +26,11 @@ def init():
         term.connect()
 
 def main(args):
+    parser = ArgumentParser()
+    parser.add_argument("-p", "--port", default=8080, type=int, help="Port to listen to.")
+
+    args = parser.parse_args()
+
     WEBMUX_STATIC_PATH = os.path.join(webmux.__path__[0], "static")
     root = Home()
 
@@ -40,7 +47,8 @@ def main(args):
     root.putChild("static", static_path)
     site = server.Site(root)
     site.sessionFactory = LongSession
-    reactor.listenTCP(8080, site)
+
+    reactor.listenTCP(args.port, site)
 
     reactor.callLater(0, init)
 
