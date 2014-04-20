@@ -4,3 +4,5 @@ tty.js-master
 connect.sh
 connections.db
 webmux.db
+dist
+*.egg-info

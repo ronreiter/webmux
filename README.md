@@ -45,8 +45,6 @@ a file called *webmuxd.conf* in your /etc/init directory, that contains:
 TODOs
 =====
 
-* Manage users
-
 * implement tabs properly
 * remove references to focusedTerminal in favor of backbone triggered events, and fix focus issues
 * support keyboard-interactive method (https://www.ietf.org/rfc/rfc4256.txt)
@@ -68,8 +66,16 @@ Contributors
 
 webmux is based on code from Christopher Jeffrey's tty.js project:
 
-    https://github.com/chjj/tty.js
+https://github.com/chjj/tty.js
 
+
+Troubleshooting
+===============
+
+Part of the dependencies require compiling code. On Macs, a recent change to the compiler made the following command
+necessary when compiling packages with warnings in their code.
+
+    export ARCHFLAGS="-Wno-error=unused-command-line-argument-hard-error-in-future"
 
 License
 =======

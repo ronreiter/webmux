@@ -1,0 +1,17 @@
+Metadata-Version: 1.0
+Name: webmux
+Summary: A web-based terminal emulator
+Author: Ron Reiter
+Author-email: ron.reiter@gmail.com
+License: MIT
+
+Description:
+
+    webmux is an open-source web based SSH terminal multiplexer.
+
+    Author:
+    --------
+
+        Ron Reiter <ron.reiter@gmail.com>
+
+Platform: UNKNOWN
