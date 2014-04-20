@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>webmux - A web-based terminal multiplexer</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Average+Sans|Istok+Web:400,700' rel='stylesheet' type='text/css'>
+    <link rel="icon" href="website/logo.png"/>
     <style>
 
         img {
             width: 100%;
         }
+        h1,h2,h3,h4,h5,h6,p {
+            font-family: "Istok Web", sans-serif !important;
+        }
     </style>
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <a href="https://github.com/ronreiter/webmux"><img style="position: absolute; top: 0; right: 0; border: 0; width: 150px; height: 150px" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
 
+<h1 style="background: #eee; text-align: center; font-size: 50px; margin-top: 50px; padding: 20px;"><img src="website/logo.png" style="width: 40px; height: 40px;"/> webmux</h1>
+
 <div class="container">
-    <h1 style="text-align: center; font-size: 50px; margin-top: 50px">webmux</h1>
     <h3 style="text-align: center">A web-based terminal multiplexer.</h3>
     <p style="text-align: center">By <a href="https://github.com/ronreiter">Ron Reiter</a></p>
 
@@ -64,7 +70,8 @@ sudo python setup.py install</pre>
 
             <pre>webmuxd</pre>
 
-            <p>And then access <a href="http://localhost:8080">http://localhost:8080</a>.</p>
+            <p>And then access <a href="http://localhost:8080">http://localhost:8080</a>. Note that webmux will create
+            a file called <b>webmux.db</b> in its working directory, in which it will store all connection and user information</p>
         </div>
     </div>
 
