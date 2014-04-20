@@ -10,6 +10,12 @@ Running webmux
 
 To run webmux, simply install this package:
 
+    sudo pip install webmux
+
+Or:
+
+    git clone https://github.com/ronreiter/webmux.git
+    cd webmux
     sudo python setup.py install
 
 And then run webmuxd:
