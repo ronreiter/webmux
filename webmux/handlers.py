@@ -4,9 +4,10 @@ from webmux.models import User
 from twisted.web import resource
 
 import webmux
+import os
 
-from jinja2 import Environment, PackageLoader
-jinja = Environment(loader=PackageLoader(webmux.__path__[0], 'templates'))
+from jinja2 import Environment, FileSystemLoader
+jinja = Environment(loader=FileSystemLoader(os.path.join(webmux.__path__[0], 'templates')))
 
 from Crypto.Cipher import AES
 

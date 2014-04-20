@@ -12,6 +12,9 @@ from webmux.protocols import TerminalFactory
 from webmux.user import LongSession
 from webmux.models import Terminal
 
+import webmux
+import os
+
 class StaticResource(resource.Resource):
     isLeaf = False
 
@@ -21,13 +24,14 @@ def init():
         term.connect()
 
 def main(args):
+    WEBMUX_STATIC_PATH = os.path.join(webmux.__path__[0], "static")
     root = Home()
 
     static_path = resource.Resource()
 
-    static_path.putChild("css", static.File("./static/css"))
-    static_path.putChild("js", static.File("./static/js"))
-    static_path.putChild("img", static.File("./static/img"))
+    static_path.putChild("css", static.File(WEBMUX_STATIC_PATH + "/css"))
+    static_path.putChild("js", static.File(WEBMUX_STATIC_PATH + "/js"))
+    static_path.putChild("img", static.File(WEBMUX_STATIC_PATH + "/img"))
 
     root.putChild("terminal", SockJSResource(TerminalFactory))
     root.putChild("signup", Signup())
