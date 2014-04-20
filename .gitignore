@@ -6,3 +6,4 @@ connections.db
 webmux.db
 dist
 *.egg-info
+build

@@ -30,5 +30,9 @@ setup(
     packages=['webmux'],
     scripts=['webmuxd'],
     license='MIT',
-    install_requires=reqs
+    install_requires=reqs,
+    include_package_data=True,
+    package_data={
+        'webmux': ['webmux/static', 'webmux/templates']
+    },
 )
