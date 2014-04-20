@@ -27,7 +27,7 @@ def init():
 
 def main(args):
     parser = ArgumentParser()
-    parser.add_argument("-p", "--port", default=8080, type=int, help="Port to listen to.")
+    parser.add_argument("-p", "--port", default=8080, type=int, help="Port to listen on.")
 
     args = parser.parse_args()
 
