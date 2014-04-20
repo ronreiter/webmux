@@ -81,7 +81,7 @@ Troubleshooting
 Part of the dependencies require compiling code. On Macs, a recent change to the compiler made the following command
 necessary when compiling packages with warnings in their code.
 
-    export ARCHFLAGS="-Wno-error=unused-command-line-argument-hard-error-in-future"
+    sudo ARCHFLAGS="-Wno-error=unused-command-line-argument-hard-error-in-future" pip install webmux
 
 License
 =======
