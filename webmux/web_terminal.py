@@ -39,7 +39,7 @@ class WebTerminal(Terminal):
         return self._rows, self._cols, self._cols * 5, self._rows * 13
 
     def get_name(self):
-        return "xterm-new"
+        return "xterm-256color"
 
     def resize(self, cols, rows):
         self._cols = cols
