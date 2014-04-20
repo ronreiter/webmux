@@ -21,7 +21,7 @@
 
     <div class="row">
     <div class="col-lg-8 col-lg-offset-2">
-        <img src="preview.png"/>
+        <img src="website/preview.png"/>
     </div>
 
     </div>
@@ -41,9 +41,34 @@
     </div>
 
     <div class="row">
-        <img src=""
+        <div class="col-lg-8 col-lg-offset-2">
+            <h3>Installing</h3>
+            <p>To install, first install the libffi package (required by cffi, a dependency of Twisted):</p>
+            <pre>sudo yum install libffi-devel</pre>
+            <p>Or:</p>
+            <pre>sudo apt-get install libffi-dev</pre>
+
+            <p>Then, install using pip:</p>
+
+            <pre>sudo pip install webmux</pre>
+
+            <p>Or:</p>
+
+            <pre>git clone https://github.com/ronreiter/webmux.git
+cd webmux
+sudo python setup.py install</pre>
+
+            <h3>Running the daemon</h3>
+
+            <p>After installing, run:</p>
+
+            <pre>webmuxd</pre>
+
+            <p>And then access <a href="http://localhost:8080">http://localhost:8080</a>.</p>
+        </div>
     </div>
 
+    <h1>Features</h1>
     <div class="row" style="margin-top: 30px">
         <div class="col-lg-6">
             <h3 style="text-align: center">Create and manage connections</h3>
@@ -57,14 +82,20 @@
     </div>
     <div class="row">
         <div class="col-lg-6">
-            <img src="new_connection.png"/>
+            <img src="website/new_connection.png"/>
         </div>
         <div class="col-lg-6">
-            <img src="manage_users.png"/>
+            <img src="website/manage_users.png"/>
         </div>
     </div>
 
+    <div class="row">
+        <h1>Contributing</h1>
+        <p>Feel free to fork and contribute to the webmux project: <a href="https://github.com/ronreiter/webmux">https://github.com/ronreiter/webmux</a>.</p>
+
+    </div>
 
 </div>
+<footer style="text-align: center; margin: 30px 0">Copyright &copy; 2014, Ron Reiter. <b>webmux</b> is licensed under the MIT license.</footer>
 </body>
 </html>

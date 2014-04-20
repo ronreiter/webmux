@@ -8,7 +8,15 @@ webmux uses the Twisted framework for Python, Backbone.js, and sockjs.
 Running webmux
 --------------
 
-To run webmux, simply install this package:
+To install, first install the libffi package (required by cffi, a dependency of Twisted):
+
+    sudo yum install libffi-devel
+
+Or:
+
+    sudo apt-get install libffi-dev
+
+Then, install using pip:
 
     sudo pip install webmux
 
