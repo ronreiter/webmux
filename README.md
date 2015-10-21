@@ -10,7 +10,7 @@ Running webmux
 
 To install, first install the libffi package (required by cffi, a dependency of Twisted):
 
-    sudo yum install libffi-devel
+    sudo yum install libffi-devel libpython-dev libssl-dev
 
 Or:
 
