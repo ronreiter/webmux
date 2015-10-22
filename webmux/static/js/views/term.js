@@ -2257,7 +2257,8 @@ define(["underscore", "backbone"], function(_, Backbone) {
                     break;
                 default:
                     // a-z and space
-                    if (ev.ctrlKey) {
+                    if (ev.altKey && ev.ctrlKey) {
+                    } else if (ev.ctrlKey) {
                         if (ev.keyCode >= 65 && ev.keyCode <= 90) {
                             // Ctrl-A
                             if (this.screenKeys) {
