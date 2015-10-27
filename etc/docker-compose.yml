@@ -1,0 +1,8 @@
+
+test-sshd:
+  build: ./sshd
+
+webmux:
+  build: ../
+  links:
+    - test-sshd:test-sshd
